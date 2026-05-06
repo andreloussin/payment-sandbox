@@ -4,5 +4,6 @@ allowBuilds:
   unrs-resolver: true
 
 packages:
-  - "apps/*"
-  - "packages/*"
+  - "apps/api"
+  # - "apps/web"
+  # - "packages/shared"
