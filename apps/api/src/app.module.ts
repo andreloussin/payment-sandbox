@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { envValidationSchema } from './config/env.validation';
 import { LoggerModule } from 'nestjs-pino';
 import { HealthModule } from './modules/health/health.module';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { HealthModule } from './modules/health/health.module';
       isGlobal: true,
       validationSchema: envValidationSchema,
     }),
+
     LoggerModule.forRoot({
       pinoHttp: {
         transport:
@@ -21,6 +23,8 @@ import { HealthModule } from './modules/health/health.module';
             : undefined,
       },
     }),
+
+    DatabaseModule,
 
     HealthModule,
   ],
