@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { envValidationSchema } from './config/env.validation';
 import { LoggerModule } from 'nestjs-pino';
+import { HealthModule } from './modules/health/health.module';
 
 @Module({
   imports: [
@@ -22,6 +23,8 @@ import { LoggerModule } from 'nestjs-pino';
             : undefined,
       },
     }),
+
+    HealthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
