@@ -4,13 +4,17 @@ import { Logger } from 'nestjs-pino';
 import { HttpExceptionFilter } from 'common/filters/http-exception.filter';
 import { ValidationPipe } from '@nestjs/common';
 
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     bufferLogs: true,
   });
 
   app.useLogger(app.get(Logger));
+
   app.useGlobalFilters(new HttpExceptionFilter());
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -18,6 +22,21 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  // Prefix global API
+  app.setGlobalPrefix('api/v1');
+
+  // Swagger setup
+  const config = new DocumentBuilder()
+    .setTitle('Payment Sandbox API')
+    .setDescription('API de simulation de paiement')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+
+  SwaggerModule.setup('docs', app, document);
 
   await app.listen(process.env.PORT ?? 3000);
 }
