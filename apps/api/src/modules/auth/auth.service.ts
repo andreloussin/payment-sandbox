@@ -1,46 +1,71 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '../users/schemas/user.schema';
+import { UsersService } from '../users/users.service';
+import type { RegisterDto } from './dto/register.dto';
+import { UserRole } from '../users/enums/user-role.enum';
+import { LoginDto } from './dto/login.dto';
+import { JwtPayload } from './types/jwt-payload.type';
+import { UserDocument } from '../users/schemas/user.schema';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectModel(User.name) private userModel: Model<User>,
+    private readonly usersService: UsersService,
     private jwtService: JwtService,
   ) {}
 
-  async register(email: string, password: string) {
-    const existing = await this.userModel.findOne({ email });
+  async register(
+    dto: RegisterDto,
+  ): Promise<{ user: UserDocument; access_token: string }> {
+    const existing = await this.usersService.findByEmail(dto.email);
     if (existing) throw new BadRequestException('User already exists');
 
-    const hashed = await bcrypt.hash(password, 10);
+    const hashed = await bcrypt.hash(dto.password, 10);
 
-    const user = await this.userModel.create({
-      email,
+    const user = await this.usersService.create({
+      email: dto.email,
       password: hashed,
+      firstName: dto.firstName,
+      lastName: dto.lastName,
+      phone: dto.phone,
+      role: UserRole.MERCHANT,
     });
 
-    return this.generateTokens(user.id, user.email);
+    return {
+      user: user,
+      access_token: this.generateTokens(user),
+    };
   }
 
-  async login(email: string, password: string) {
-    const user = await this.userModel.findOne({ email });
+  async login(
+    dto: LoginDto,
+  ): Promise<{ user: UserDocument; access_token: string }> {
+    const user = await this.usersService.findByEmail(dto.email);
     if (!user) throw new BadRequestException('Invalid credentials');
 
-    const match = await bcrypt.compare(password, user.password);
+    const match = await bcrypt.compare(dto.password, user.password);
     if (!match) throw new BadRequestException('Invalid credentials');
 
-    return this.generateTokens(user.id, user.email);
+    return {
+      user: user,
+      access_token: this.generateTokens(user),
+    };
   }
 
-  private generateTokens(userId: string, email: string) {
-    const payload = { sub: userId, email };
-
-    return {
-      access_token: this.jwtService.sign(payload),
+  private generateTokens(user: {
+    id: string;
+    email: string;
+    role: UserRole;
+    isActive: boolean;
+  }): string {
+    const payload: JwtPayload = {
+      sub: user.id,
+      email: user.email,
+      role: user.role,
+      isActive: user.isActive,
     };
+
+    return this.jwtService.sign(payload);
   }
 }

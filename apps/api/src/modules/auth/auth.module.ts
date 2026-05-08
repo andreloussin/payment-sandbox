@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { AppConfigService } from 'src/config/app-config.service';
 import { AppConfigModule } from 'src/config/config.module';
+import { UsersModule } from '../users/users.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { AppConfigModule } from 'src/config/config.module';
         signOptions: { expiresIn: '1d' },
       }),
     }),
+    UsersModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
