@@ -1,29 +1,32 @@
-import { Controller, Post, Body, UseGuards, Get, Req } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import type { AuthenticatedRequest } from './types/auth-request.type';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { AuthMapper } from './mappers/auth.mapper';
+import { ApiTags } from '@nestjs/swagger';
+import { AuthResponseDto } from './dto/auth-response.dto';
+import { ApiOkResponseData } from 'src/common/swagger/api-response.decorator';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @ApiOkResponseData(AuthResponseDto, {
+    description: 'User registered successfully',
+  })
   @Post('register')
-  register(@Body() dto: RegisterDto) {
-    return this.authService.register(dto.email, dto.password);
+  async register(@Body() dto: RegisterDto) {
+    const result = await this.authService.register(dto);
+    return AuthMapper.toResponse(result.user, result.access_token);
   }
 
+  @ApiOkResponseData(AuthResponseDto, {
+    description: 'User logged in successfully',
+  })
   @Post('login')
-  login(@Body() dto: LoginDto) {
-    return this.authService.login(dto.email, dto.password);
-  }
-
-  @ApiBearerAuth('access-token')
-  @UseGuards(JwtAuthGuard)
-  @Get('me')
-  me(@Req() req: AuthenticatedRequest) {
-    return req.user;
+  async login(@Body() dto: LoginDto) {
+    const result = await this.authService.login(dto);
+    return AuthMapper.toResponse(result.user, result.access_token);
   }
 }
