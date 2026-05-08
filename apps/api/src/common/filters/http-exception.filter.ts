@@ -8,6 +8,14 @@ import {
 
 import { Request, Response } from 'express';
 
+type ExceptionResponse =
+  | string
+  | {
+      message: string | string[];
+      error?: string;
+      statusCode?: number;
+    };
+
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: unknown, host: ArgumentsHost) {
@@ -20,16 +28,34 @@ export class HttpExceptionFilter implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    const message =
+    const exceptionResponse =
       exception instanceof HttpException
-        ? exception.getResponse()
+        ? (exception.getResponse() as ExceptionResponse)
         : 'Internal server error';
 
+    const message =
+      typeof exceptionResponse === 'string'
+        ? exceptionResponse
+        : Array.isArray(exceptionResponse.message)
+          ? exceptionResponse.message.join(', ')
+          : exceptionResponse.message;
+
     response.status(status).json({
-      statusCode: status,
+      success: false,
       message,
-      timestamp: new Date().toISOString(),
-      path: request.url,
+      data: null,
+      error:
+        typeof exceptionResponse === 'string'
+          ? { message: exceptionResponse }
+          : exceptionResponse,
+      meta: {
+        timestamp: new Date().toISOString(),
+        path: request.originalUrl,
+        method: request.method,
+        // requestId: req.requestId,
+        latencyMs: null,
+        ip: request.ip,
+      },
     });
   }
 }
