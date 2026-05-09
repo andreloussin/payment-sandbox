@@ -21,7 +21,8 @@
                 "build"
             ],
             "outputs": [
-                "coverage/**"
+                "coverage/**",
+                "test-results/**"
             ]
         }
     }

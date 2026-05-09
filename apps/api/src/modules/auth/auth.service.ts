@@ -48,12 +48,12 @@ export class AuthService {
     const user = await this.usersService.findByEmail(dto.email);
     if (!user) throw new BadRequestException('Invalid credentials');
 
-    const match = await bcrypt.compare(dto.password, user.password);
-    if (!match) throw new BadRequestException('Invalid credentials');
-
     if (!user.isActive) {
       throw new UnauthorizedException('Account is deactivated');
     }
+
+    const match = await bcrypt.compare(dto.password, user.password);
+    if (!match) throw new BadRequestException('Invalid credentials');
 
     return {
       user: user,
