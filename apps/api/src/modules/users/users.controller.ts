@@ -11,7 +11,7 @@ import type { AuthenticatedUser } from '../auth/types/auth-request.type';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UserMapper } from './mappers/user.mapper';
 import { UserResponseDto } from './dto/user-response.dto';
-import { ApiOkResponseData } from 'src/common/swagger/api-response.decorator';
+import { ApiOkResponseData } from '../../common/swagger/api-response.decorator';
 
 @ApiTags('Users')
 @ApiBearerAuth('access-token')

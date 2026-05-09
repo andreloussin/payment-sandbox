@@ -1,4 +1,4 @@
-import { UserMapper } from 'src/modules/users/mappers/user.mapper';
+import { UserMapper } from '../../users/mappers/user.mapper';
 import { UserDocument } from '../../users/schemas/user.schema';
 import { AuthResponseDto } from '../dto/auth-response.dto';
 

@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { UserRole } from 'src/modules/users/enums/user-role.enum';
+import { UserRole } from '../../users/enums/user-role.enum';
 
 export interface AuthenticatedUser {
   userId: string;

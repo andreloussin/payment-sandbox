@@ -5,8 +5,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { AppConfigService } from 'src/config/app-config.service';
-import { AppConfigModule } from 'src/config/config.module';
+import { AppConfigService } from '../../config/app-config.service';
+import { AppConfigModule } from '../../config/config.module';
 import { UsersModule } from '../users/users.module';
 
 @Module({

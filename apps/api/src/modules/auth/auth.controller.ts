@@ -5,7 +5,7 @@ import { LoginDto } from './dto/login.dto';
 import { AuthMapper } from './mappers/auth.mapper';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthResponseDto } from './dto/auth-response.dto';
-import { ApiOkResponseData } from 'src/common/swagger/api-response.decorator';
+import { ApiOkResponseData } from '../../common/swagger/api-response.decorator';
 
 @ApiTags('Auth')
 @Controller('auth')
