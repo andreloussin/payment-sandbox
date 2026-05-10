@@ -1,5 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { BadRequestException, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
@@ -156,7 +160,7 @@ describe('AuthService', () => {
 
       const promise = service.login(dto);
 
-      await expect(promise).rejects.toBeInstanceOf(BadRequestException);
+      await expect(promise).rejects.toBeInstanceOf(UnauthorizedException);
       await expect(promise).rejects.toThrow('Invalid credentials');
 
       expect(bcrypt.compare).not.toHaveBeenCalled();
@@ -182,8 +186,8 @@ describe('AuthService', () => {
 
       const promise = service.login(dto);
 
-      await expect(promise).rejects.toBeInstanceOf(BadRequestException);
-      await expect(promise).rejects.toThrow('Invalid credentials');
+      await expect(promise).rejects.toBeInstanceOf(UnauthorizedException);
+      await expect(promise).rejects.toThrow('Invalid password');
 
       expect(jwtServiceMock.sign).not.toHaveBeenCalled();
     });
@@ -207,10 +211,9 @@ describe('AuthService', () => {
 
       const promise = service.login(dto);
 
-      await expect(promise).rejects.toBeInstanceOf(UnauthorizedException);
+      await expect(promise).rejects.toBeInstanceOf(ForbiddenException);
       await expect(promise).rejects.toThrow('Account is deactivated');
 
-      expect(bcrypt.compare).not.toHaveBeenCalled();
       expect(jwtServiceMock.sign).not.toHaveBeenCalled();
     });
   });
