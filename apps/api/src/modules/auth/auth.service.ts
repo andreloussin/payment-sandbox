@@ -2,6 +2,7 @@ import {
   Injectable,
   BadRequestException,
   UnauthorizedException,
+  ForbiddenException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -46,14 +47,14 @@ export class AuthService {
     dto: LoginDto,
   ): Promise<{ user: UserDocument; access_token: string }> {
     const user = await this.usersService.findByEmail(dto.email);
-    if (!user) throw new BadRequestException('Invalid credentials');
-
-    if (!user.isActive) {
-      throw new UnauthorizedException('Account is deactivated');
-    }
+    if (!user) throw new UnauthorizedException('Invalid credentials');
 
     const match = await bcrypt.compare(dto.password, user.password);
-    if (!match) throw new BadRequestException('Invalid credentials');
+    if (!match) throw new UnauthorizedException('Invalid password');
+
+    if (!user.isActive) {
+      throw new ForbiddenException('Account is deactivated');
+    }
 
     return {
       user: user,
