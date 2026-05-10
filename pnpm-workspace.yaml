@@ -1,5 +1,7 @@
 allowBuilds:
   '@nestjs/core': true
+  '@scarf/scarf': true
+  bcrypt: true
   sharp: false
   unrs-resolver: true
 
