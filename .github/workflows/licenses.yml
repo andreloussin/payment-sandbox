@@ -1,0 +1,78 @@
+name: License Check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  licenses:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: 11.0.6
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Verify pnpm
+        run: pnpm --version
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # =========================
+      # API LICENSE CHECK
+      # =========================
+      - name: Check allowed licenses (API)
+        run: pnpm licenses:policy:api
+
+      - name: Generate license report (API)
+        run: pnpm licenses:report:api
+
+      - name: Ensure API report is up to date
+        run: pnpm licenses:audit:api
+
+      # =========================
+      # WEB LICENSE CHECK
+      # =========================
+      - name: Check allowed licenses (WEB)
+        run: pnpm licenses:policy:web
+
+      - name: Generate license report (WEB)
+        run: pnpm licenses:report:web
+
+      - name: Ensure WEB report is up to date
+        run: pnpm licenses:audit:web
+
+      - name: License audit failure hint (WEB)
+        if: failure()
+        run: |
+          echo "❌ License audit failed."
+          echo ""
+          echo "📦 What happened:"
+          echo "   - license:policy     → validates allowed licenses (MIT, Apache-2.0, etc.)"
+          echo "   - license:report     → regenerates THIRD_PARTY_LICENSES_*.txt files"
+          echo "   - license:audit      → checks if generated files match git (diff check)"
+          echo ""
+          echo "👉 Fix locally:"
+          echo "   pnpm licenses:ci"
+          echo ""
+          echo "👉 Or step-by-step:"
+          echo "   1. pnpm licenses:policy"
+          echo "   2. pnpm licenses:report"
+          echo "   3. git diff"
+          echo "   4. git add THIRD_PARTY_LICENSES_*.txt"
+          echo ""
+          echo "💡 If the policy check fails, review the new dependencies and their licenses. You may add :api or :web to filter by application."
+          echo ""
+          echo "👉 Then commit the updated files."

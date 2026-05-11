@@ -10,7 +10,18 @@
     "dev": "turbo dev",
     "build": "turbo build",
     "lint": "turbo lint",
-    "test": "turbo test"
+    "test": "turbo test",
+    "licenses:policy:api": "pnpm --dir apps/api exec license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;Apache-2.0;ISC;BSD-2-Clause;BSD-3-Clause;Python-2.0'",
+    "licenses:report:api": "tsx scripts/generate-third-party-licenses.ts apps/api",
+    "licenses:audit:api": "git diff --exit-code -- THIRD_PARTY_LICENSES_API.txt",
+    "licenses:ci:api": "pnpm licenses:policy:api && pnpm licenses:report:api && pnpm licenses:audit:api",
+    "licenses:policy:web": "pnpm --dir apps/web exec license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;Apache-2.0;ISC;BSD-2-Clause;BSD-3-Clause;Python-2.0'",
+    "licenses:report:web": "tsx scripts/generate-third-party-licenses.ts apps/web",
+    "licenses:audit:web": "git diff --exit-code -- THIRD_PARTY_LICENSES_WEB.txt",
+    "licenses:ci:web": "pnpm licenses:policy:web && pnpm licenses:report:web && pnpm licenses:audit:web",
+    "licenses:policy": "pnpm licenses:policy:api && pnpm licenses:policy:web",
+    "licenses:report": "pnpm licenses:report:api && pnpm licenses:report:web",
+    "licenses:ci": "pnpm licenses:ci:api && pnpm licenses:ci:web"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
