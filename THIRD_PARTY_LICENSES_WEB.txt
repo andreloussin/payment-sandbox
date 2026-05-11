@@ -1,0 +1,4 @@
+THIRD-PARTY LICENSES
+Workspace: apps/web
+Generated from production dependencies only.
+Generated at: 2026-05-11T11:41:00.488Z

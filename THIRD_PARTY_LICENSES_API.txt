@@ -1,0 +1,114 @@
+THIRD-PARTY LICENSES
+Workspace: apps/api
+Generated from production dependencies only.
+Generated at: 2026-05-11T11:40:57.333Z
+
+Package: @nestjs/common@11.1.19
+License(s): MIT
+Repository: https://github.com/nestjs/nest
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/@nestjs/common/LICENSE
+
+Package: @nestjs/config@4.0.4
+License(s): MIT
+Repository: https://github.com/nestjs/config
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/@nestjs/config/LICENSE
+
+Package: @nestjs/core@11.1.19
+License(s): MIT
+Repository: https://github.com/nestjs/nest
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/@nestjs/core/LICENSE
+
+Package: @nestjs/jwt@11.0.2
+License(s): MIT
+Repository: https://github.com/nestjs/jwt
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/@nestjs/jwt/LICENSE
+
+Package: @nestjs/mongoose@11.0.4
+License(s): MIT
+Repository: https://github.com/nestjs/mongoose
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/@nestjs/mongoose/LICENSE
+
+Package: @nestjs/passport@11.0.5
+License(s): MIT
+Repository: https://github.com/nestjs/passport
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/@nestjs/passport/LICENSE
+
+Package: @nestjs/platform-express@11.1.19
+License(s): MIT
+Repository: https://github.com/nestjs/nest
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/@nestjs/platform-express/LICENSE
+
+Package: @nestjs/swagger@11.4.2
+License(s): MIT
+Repository: https://github.com/nestjs/swagger
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/@nestjs/swagger/LICENSE
+
+Package: @nestjs/terminus@11.1.1
+License(s): MIT
+Repository: https://github.com/nestjs/terminus
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/@nestjs/terminus/LICENSE
+
+Package: bcrypt@6.0.0
+License(s): MIT
+Repository: https://github.com/kelektiv/node.bcrypt.js
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/bcrypt/LICENSE
+
+Package: class-transformer@0.5.1
+License(s): MIT
+Repository: https://github.com/typestack/class-transformer
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/class-transformer/LICENSE
+
+Package: class-validator@0.15.1
+License(s): MIT
+Repository: https://github.com/typestack/class-validator
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/class-validator/LICENSE
+
+Package: joi@18.2.1
+License(s): BSD-3-Clause
+Repository: https://github.com/hapijs/joi
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/joi/LICENSE.md
+
+Package: mongoose@9.6.1
+License(s): MIT
+Repository: https://github.com/Automattic/mongoose
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/mongoose/LICENSE.md
+
+Package: nestjs-pino@4.6.1
+License(s): MIT
+Repository: https://github.com/iamolegga/nestjs-pino
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/nestjs-pino/LICENSE
+
+Package: passport@0.7.0
+License(s): MIT
+Repository: https://github.com/jaredhanson/passport
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/passport/LICENSE
+
+Package: passport-jwt@4.0.1
+License(s): MIT
+Repository: https://github.com/mikenicholson/passport-jwt
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/passport-jwt/LICENSE
+
+Package: pino@10.3.1
+License(s): MIT
+Repository: https://github.com/pinojs/pino
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/pino/LICENSE
+
+Package: pino-pretty@13.1.3
+License(s): MIT
+Repository: https://github.com/pinojs/pino-pretty
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/pino-pretty/LICENSE
+
+Package: reflect-metadata@0.2.2
+License(s): Apache-2.0
+Repository: https://github.com/rbuckton/reflect-metadata
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/reflect-metadata/LICENSE
+
+Package: rxjs@7.8.2
+License(s): Apache-2.0
+Repository: https://github.com/reactivex/rxjs
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/rxjs/LICENSE.txt
+
+Package: swagger-ui-express@5.0.1
+License(s): MIT
+Repository: https://github.com/scottie1984/swagger-ui-express
+License file: /home/loussin/Documents/GitHub/payment-sandbox/apps/api/node_modules/swagger-ui-express/LICENSE
