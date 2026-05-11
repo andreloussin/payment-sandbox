@@ -12,6 +12,16 @@ Objectif : simuler un système fintech complet, sécurisé et scalable, avec arc
 
 ---
 
+## ⚖️ Mentions légales
+
+Ce projet est une implémentation indépendante inspirée de systèmes de paiement comme Kkiapay.
+
+Il n’est en aucun cas affilié, sponsorisé ou officiellement lié à Kkiapay ou à tout autre fournisseur de services de paiement existant.
+
+Ce projet est développé à des fins éducatives, de démonstration technique et de portfolio.
+
+---
+
 ## 🧱 Stack technique
 
 - **Monorepo** : TurboRepo
