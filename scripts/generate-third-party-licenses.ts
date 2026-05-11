@@ -81,7 +81,7 @@ const lines: string[] = [];
 lines.push('THIRD-PARTY LICENSES');
 lines.push(`Workspace: ${workspaceArg}`);
 lines.push('Generated from production dependencies only.');
-lines.push(`Generated at: ${new Date().toISOString()}`);
+// lines.push(`Generated at: ${new Date().toISOString()}`);
 lines.push('');
 
 for (const dep of entries) {

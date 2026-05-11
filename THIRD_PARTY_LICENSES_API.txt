@@ -1,7 +1,6 @@
 THIRD-PARTY LICENSES
 Workspace: apps/api
 Generated from production dependencies only.
-Generated at: 2026-05-11T11:40:57.333Z
 
 Package: @nestjs/common@11.1.19
 License(s): MIT

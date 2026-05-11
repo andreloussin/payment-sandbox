@@ -54,7 +54,10 @@ jobs:
       - name: Ensure WEB report is up to date
         run: pnpm licenses:audit:web
 
-      - name: License audit failure hint (WEB)
+      # =========================
+      # FAILURE HINT
+      # =========================
+      - name: License audit failure hint
         if: failure()
         run: |
           echo "❌ License audit failed."
