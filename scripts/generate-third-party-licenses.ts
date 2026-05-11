@@ -68,7 +68,7 @@ const entries = Object.entries(dependencies)
       version,
       licenses: info.licenses ?? 'UNKNOWN',
       repository: info.repository ?? '',
-      licenseFile: info.licenseFile ?? '',
+      //   licenseFile: info.licenseFile ?? '',
       url: info.url ?? '',
     };
   })
@@ -88,7 +88,7 @@ for (const dep of entries) {
   lines.push(`Package: ${dep.name}${dep.version ? `@${dep.version}` : ''}`);
   lines.push(`License(s): ${dep.licenses}`);
   if (dep.repository) lines.push(`Repository: ${dep.repository}`);
-  if (dep.licenseFile) lines.push(`License file: ${dep.licenseFile}`);
+  //   if (dep.licenseFile) lines.push(`License file: ${dep.licenseFile}`);
   if (dep.url) lines.push(`URL: ${dep.url}`);
   lines.push('');
 }
